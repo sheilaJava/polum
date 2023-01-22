@@ -1,4 +1,4 @@
-package shs.sheilaJava.polum.entity;
+package shs.sheilaJava.polum.user;
 
 import jakarta.persistence.*;
 

@@ -1,6 +1,7 @@
-package shs.sheilaJava.polum.entity;
+package shs.sheilaJava.polum.library;
 
 import jakarta.persistence.*;
+import shs.sheilaJava.polum.user.User;
 
 @Entity
 @Table(name = "libraries")
