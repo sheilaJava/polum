@@ -1,14 +1,23 @@
 package shs.sheilaJava.polum.entity;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "libraries")
 public class Library {
-    private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Column(name = "name", nullable = false, length = 50)
     private String name;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     public Library() {
     }
 
-    public Library(Long id, String name, User user) {
+    public Library(Integer id, String name, User user) {
         this.id = id;
         this.name = name;
         this.user = user;
@@ -19,11 +28,11 @@ public class Library {
         this.user = user;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

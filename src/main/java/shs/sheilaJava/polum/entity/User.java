@@ -1,15 +1,24 @@
 package shs.sheilaJava.polum.entity;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "users")
 public class User {
-    private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Column(name = "username", nullable = false, length = 50)
     private String username;
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
+    @Column(name = "password", nullable = false, length = 24)
     private String password;
 
     public User() {
     }
 
-    public User(Long id, String username, String email, String password) {
+    public User(Integer id, String username, String email, String password) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -22,11 +31,11 @@ public class User {
         this.password = password;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

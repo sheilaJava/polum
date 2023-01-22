@@ -9,5 +9,4 @@ public class PolumApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PolumApplication.class, args);
 	}
-
 }
