@@ -1,10 +1,18 @@
 package shs.sheilaJava.polum.library;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import shs.sheilaJava.polum.user.User;
 
 @Entity
 @Table(name = "libraries")
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Data
 public class Library {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,51 +22,4 @@ public class Library {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
-
-    public Library() {
-    }
-
-    public Library(Integer id, String name, User user) {
-        this.id = id;
-        this.name = name;
-        this.user = user;
-    }
-
-    public Library(String name, User user) {
-        this.name = name;
-        this.user = user;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    @Override
-    public String toString() {
-        return "Library{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", user=" + user +
-                '}';
-    }
 }
