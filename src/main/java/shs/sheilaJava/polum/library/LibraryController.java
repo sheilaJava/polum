@@ -10,19 +10,20 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LibraryController {
     public final LibraryService libraryService;
-    @GetMapping
-    public List<Library> getAllLibraries() {
-        return libraryService.getAllLibraries();
+    @GetMapping("/{userId}")
+    public List<Library> getAllLibrariesByUser(@PathVariable("userId") Integer userId) {
+        return libraryService.getAllLibrariesByUser(userId);
     }
     @PostMapping
-    public Library createLibrary(@RequestBody Library library) {
-        return libraryService.createLibrary(library);
+    public void createLibrary(@RequestBody Library library) {
+        libraryService.createLibrary(library);
     }
-    @PutMapping
-    public Library updateLibrary(@RequestBody Library library) {
-        return libraryService.updateLibrary(library);
+    @PutMapping("/{id}")
+    public void updateLibrary(@RequestBody Library library, @PathVariable("id") Integer id) {
+        libraryService.updateLibrary(library, id);
     }
-    public void deleteLibrary(@RequestBody Integer id) {
+    @DeleteMapping("/{id}")
+    public void deleteLibrary(@PathVariable("id") Integer id) {
         libraryService.deleteLibrary(id);
     }
 }
