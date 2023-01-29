@@ -14,16 +14,20 @@ public class UserController {
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
+    @GetMapping("/{id}")
+    public User getUserById(@PathVariable("id") Integer id) {
+        return userService.getUserById(id);
+    }
     @PostMapping
     public User createUser(@RequestBody User user) {
        return userService.createUser(user);
     }
-    @PutMapping
-    public User updateUser(@RequestBody User user) {
-        return userService.updateUser(user);
+    @PutMapping("/{id}")
+    public void updateUser(@RequestBody User user, @PathVariable("id") Integer id) {
+        userService.updateUser(user, id);
     }
-    @DeleteMapping
-    public void deleteUser(@RequestBody Integer id) {
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable("id") Integer id) {
         userService.deleteUser(id);
     }
 }
