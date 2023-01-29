@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import shs.sheilaJava.polum.library.Library;
+import shs.sheilaJava.polum.user.User;
 
 @Entity
 @Table(name = "books")
@@ -19,9 +20,9 @@ public class Book {
     private Integer id;
     @Column(name = "title", nullable = false)
     private String title;
-    @Column(name = "author", nullable = false)
+    @Column(name = "author", nullable = false, length = 150)
     private String author;
-    @Column(name = "genre", nullable = false)
+    @Column(name = "genre", nullable = false, length = 50)
     private String genre;
     @Column(name = "pages", nullable = false, length = 4)
     private Integer pages;
@@ -30,4 +31,7 @@ public class Book {
     @ManyToOne
     @JoinColumn(name = "library_id", nullable = false)
     private Library library;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 }

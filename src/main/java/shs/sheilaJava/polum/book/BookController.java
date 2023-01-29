@@ -10,20 +10,24 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BookController {
     public final BookService bookService;
-    @GetMapping
-    public List<Book> getAllBooks() {
-        return bookService.getAllBooks();
+    @GetMapping("/{libraryId}")
+    public List<Book> getAllBooksByLibrary(@PathVariable("libraryId") Integer libraryId) {
+        return bookService.getAllBooksByLibrary(libraryId);
+    }
+    @GetMapping("/{userId}")
+    public List<Book> getAllBooksByUser(@PathVariable("userId") Integer userId) {
+        return bookService.getAllBooksByUser(userId);
     }
     @PostMapping
-    public Book createBook(@RequestBody Book book) {
-        return bookService.createBook(book);
+    public void createBook(@RequestBody Book book) {
+        bookService.createBook(book);
     }
-    @PutMapping
-    public Book updateBook(@RequestBody Book book) {
-        return bookService.updateBook(book);
+    @PutMapping("/{id}")
+    public void updateBook(@RequestBody Book book, @PathVariable("id") Integer id) {
+        bookService.updateBook(book, id);
     }
-    @DeleteMapping
-    public void deleteBook(@RequestBody Integer id) {
+    @DeleteMapping("/{id}")
+    public void deleteBook(@PathVariable("id") Integer id) {
         bookService.deleteBook(id);
     }
 }
