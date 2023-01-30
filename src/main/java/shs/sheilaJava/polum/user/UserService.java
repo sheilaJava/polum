@@ -15,7 +15,10 @@ public class UserService {
     }
 
     public User getUserById(Integer id) {
-        return userRepository.findById(id).orElse(null);
+        if (userRepository.findById(id).isEmpty()) {
+            throw new RuntimeException("User not found");
+        }
+        return userRepository.findById(id).get();
     }
 
     public User createUser(User user) {
