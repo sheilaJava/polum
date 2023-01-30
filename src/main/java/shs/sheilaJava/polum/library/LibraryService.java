@@ -9,21 +9,25 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LibraryService {
     public final LibraryRepository libraryRepository;
+
     public List<Library> getAllLibrariesByUser(Integer userId) {
         return libraryRepository.findByUserId(userId);
     }
+
     public void createLibrary(Library library) {
         libraryRepository.save(library);
     }
+
     public void updateLibrary(Library library, Integer id) {
-        if (libraryRepository.findById(id).isPresent()) {
-            Library originalLibrary = libraryRepository.findById(id).get();
-            if (library.getName() != null && library.getName().length() <= 50) originalLibrary.setName(library.getName());
-            libraryRepository.save(originalLibrary);
-        } else {
+        if (libraryRepository.findById(id).isEmpty()) {
             throw new RuntimeException("Library not found");
         }
+        Library originalLibrary = libraryRepository.findById(id).get();
+        if (library.getName() != null && library.getName().length() <= 50)
+            originalLibrary.setName(library.getName());
+        libraryRepository.save(originalLibrary);
     }
+
     public void deleteLibrary(Integer id) {
         libraryRepository.deleteById(id);
     }
