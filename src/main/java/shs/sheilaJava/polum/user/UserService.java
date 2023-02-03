@@ -33,7 +33,7 @@ public class UserService {
         if (user.getUsername() != null && user.getUsername().length() <= 50)
             originalUser.setUsername(user.getUsername());
         if (user.getEmail() != null && user.getEmail().length() <= 255) originalUser.setEmail(user.getEmail());
-        if (user.getPassword() != null && user.getPassword().matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,24}$"))
+        if (user.getPassword() != null && user.getPassword().matches("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,24}$"))
             originalUser.setPassword(user.getPassword());
         userRepository.save(originalUser);
     }
