@@ -2,6 +2,8 @@ package shs.sheilaJava.polum.book;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import shs.sheilaJava.polum.exception.ResourceNotFoundException;
+import shs.sheilaJava.polum.exception.ValidationException;
 
 import java.util.List;
 
@@ -19,11 +21,11 @@ public class BookController {
         return bookService.getAllBooksByUser(userId);
     }
     @PostMapping
-    public void createBook(@RequestBody Book book) {
+    public void createBook(@RequestBody Book book) throws ValidationException {
         bookService.createBook(book);
     }
     @PutMapping("/{id}")
-    public void updateBook(@RequestBody Book book, @PathVariable("id") Integer id) {
+    public void updateBook(@RequestBody Book book, @PathVariable("id") Integer id) throws ValidationException, ResourceNotFoundException {
         bookService.updateBook(book, id);
     }
     @DeleteMapping("/{id}")

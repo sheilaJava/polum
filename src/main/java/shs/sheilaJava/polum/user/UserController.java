@@ -2,6 +2,8 @@ package shs.sheilaJava.polum.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import shs.sheilaJava.polum.exception.ResourceNotFoundException;
+import shs.sheilaJava.polum.exception.ValidationException;
 
 import java.util.List;
 
@@ -15,15 +17,15 @@ public class UserController {
         return userService.getAllUsers();
     }
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable("id") Integer id) {
+    public User getUserById(@PathVariable("id") Integer id) throws ResourceNotFoundException {
         return userService.getUserById(id);
     }
     @PostMapping
-    public User createUser(@RequestBody User user) {
+    public User createUser(@RequestBody User user) throws ValidationException {
        return userService.createUser(user);
     }
     @PutMapping("/{id}")
-    public void updateUser(@RequestBody User user, @PathVariable("id") Integer id) {
+    public void updateUser(@RequestBody User user, @PathVariable("id") Integer id) throws ValidationException, ResourceNotFoundException {
         userService.updateUser(user, id);
     }
     @DeleteMapping("/{id}")
