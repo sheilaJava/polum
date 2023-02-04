@@ -15,6 +15,12 @@ public class LibraryService {
     }
 
     public void createLibrary(Library library) {
+        if (library.getName() == null) {
+            throw new RuntimeException("Name is required");
+        } else if (library.getName().length() >= 50) {
+            throw new RuntimeException("Name must be less than 50 characters");
+        }
+
         libraryRepository.save(library);
     }
 
@@ -23,8 +29,12 @@ public class LibraryService {
             throw new RuntimeException("Library not found");
         }
         Library originalLibrary = libraryRepository.findById(id).get();
-        if (library.getName() != null && library.getName().length() <= 50)
+
+        if (library.getName() != null && library.getName().length() >= 50) {
+            throw new RuntimeException("Name must be less than 50 characters");
+        } else if (library.getName() != null)
             originalLibrary.setName(library.getName());
+
         libraryRepository.save(originalLibrary);
     }
 
