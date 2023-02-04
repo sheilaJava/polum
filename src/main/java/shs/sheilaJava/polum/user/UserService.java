@@ -34,7 +34,7 @@ public class UserService {
             throw new ValidationException("Email is required");
         } else if (userRepository.findByEmail(user.getEmail()).isPresent()) {
             throw new ValidationException("Email already exists");
-        } else if (!user.getEmail().matches("^[\\w-]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
+        } else if (!user.getEmail().matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
             throw new ValidationException("Email must be valid");
         } else if (user.getEmail().length() >= 255) {
             throw new ValidationException("Email must be less than 255 characters");
@@ -62,7 +62,7 @@ public class UserService {
 
         if (user.getEmail() != null && userRepository.findByEmail(user.getEmail()).isPresent()) {
             throw new ValidationException("Email already exists");
-        }else if (user.getEmail() != null && !user.getEmail().matches("^[\\w-]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
+        }else if (user.getEmail() != null && !user.getEmail().matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
             throw new ValidationException("Email must be valid");
         } else if (user.getEmail() != null && user.getEmail().length() >= 255) {
             throw new ValidationException("Email must be less than 255 characters");
